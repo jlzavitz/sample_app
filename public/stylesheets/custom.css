@@ -1,7 +1,5 @@
 .container {
     width: 710px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 body {
@@ -18,6 +16,7 @@ header img{
 }
 
 section {
+    min-height: 40px;
     margin-top: 1em;
     background-color: white;
 }
