@@ -26,12 +26,6 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
-  
-  def deny_access
-    store_location
-    flash[:notice] = "Please sign in to access this page."
-    redirect_to signin_path
-  end
 
   def store_location
     session[:return_to] = request.fullpath
@@ -45,7 +39,17 @@ module SessionsHelper
   def clear_return_to
     session[:return_to] = nil
   end
+  
+  def authenticate
+    deny_access unless signed_in?
+  end
 
+  def deny_access
+    store_location
+    flash[:notice] = "Please sign in to access this page."
+    redirect_to signin_path
+  end
+  
   private
     def user_from_remember_token
       User.authenticate_with_salt(*remember_token)
